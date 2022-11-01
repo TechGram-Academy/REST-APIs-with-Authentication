@@ -21,9 +21,11 @@ class Login(MethodView):
     
         username = request_data["username"]
         password = hashlib.sha256(request_data["password"].encode('utf-8')).hexdigest()
-        # check if user exists in database
-
-        return create_access_token(identity="indrajeet")
+        
+        result = self.db.verify_user(username, password)
+        if result:
+            return create_access_token(identity="indrajeet")
+        abort(400, message="Username or password is incorrect")
 
 @blp.route("/user")
 class User(MethodView):
