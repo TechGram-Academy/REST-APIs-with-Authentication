@@ -5,10 +5,25 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from schemas import SuccessMessageSchema, UserSchema, UserQuerySchema
 import hashlib
+from flask_jwt_extended import create_access_token
 
 
 blp = Blueprint("Users", __name__, description="Operations on users")
 
+@blp.route("/login")
+class Login(MethodView):
+
+    def __init__(self):
+        self.db = UserDatabase()
+   
+    @blp.arguments(UserSchema)
+    def post(self, request_data):
+    
+        username = request_data["username"]
+        password = hashlib.sha256(request_data["password"].encode('utf-8')).hexdigest()
+        # check if user exists in database
+
+        return create_access_token(identity="indrajeet")
 
 @blp.route("/user")
 class User(MethodView):
