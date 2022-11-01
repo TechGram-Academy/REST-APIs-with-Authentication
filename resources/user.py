@@ -4,6 +4,7 @@ from db.user import UserDatabase
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from schemas import SuccessMessageSchema, UserSchema, UserQuerySchema
+import hashlib
 
 
 blp = Blueprint("Users", __name__, description="Operations on users")
@@ -31,7 +32,8 @@ class User(MethodView):
     def post(self, request_data):
         # check if already exists
         username = request_data["username"]
-        password = request_data["password"]
+        password = hashlib.sha256(request_data["password"].encode('utf-8')).hexdigest()
+
         if self.db.add_user(username, password):
             return {"message": "User added succesfully"}, 201
         return abort(403, message="User already exists")
