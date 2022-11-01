@@ -1,7 +1,6 @@
-from email import message
-from flask import  request
+
 import uuid
-from db import ItemDatabase
+from db.item import ItemDatabase
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from schemas import ItemGetSchema, ItemOptionalQuerySchema, ItemQuerySchema, ItemSchema, SuccessMessageSchema
