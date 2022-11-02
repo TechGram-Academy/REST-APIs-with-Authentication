@@ -3,6 +3,7 @@ from resources.item import blp as ItemBluePrint
 from resources.user import User, blp as UserBluePrint
 from flask_smorest import Api 
 from flask_jwt_extended import JWTManager
+from blocklist import BLOCKLIST
 
 
 app = Flask(__name__)
@@ -19,6 +20,7 @@ app.config["JWT_SECRET_KEY"] = "154281130814958933425240769184967185190"
 
 api = Api(app)
 jwt = JWTManager(app)
+
 api.register_blueprint(ItemBluePrint)
 api.register_blueprint(UserBluePrint)
 
