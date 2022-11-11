@@ -1,5 +1,7 @@
 import pyodbc
 
 conn = pyodbc.connect(
-            'DRIVER={SQL Server};SERVER=BEAST;DATABASE=cafe;')
+            'DRIVER={ODBC Driver 17 for SQL Server};SERVER=cafe-test.database.windows.net;DATABASE=cafe;UID=indrajeet;PWD=Redwings@2022')
 cursor = conn.cursor()
+
+print("Connected")
